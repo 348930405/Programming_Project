@@ -47,7 +47,32 @@ public class main {
             System.out.println("\n--- Main Menu ---\n1. Browse Product Categories\n2. View Cart\n3. Checkout\n4. Admin Login\n5. Exit");
             int userInput = sc.nextInt();
             switch (userInput) {
-                case 1: 
+                case 1:
+                System.out.println("\n--- Product Categories ---\n1. Electronics\n2. Clothing\n3. Books\n4. Back to Main Menu\nSelect a category by number:");
+                userInput = sc.nextInt();
+                if (userInput < 1 || userInput > 4) {
+                    System.out.println("Invalid input, returning to main menu.");
+                }
+                else {
+                    if (userInput == 1) {
+                        for (int i = 0; i < 3; i++) {
+                            System.out.println((i + 1) + "." + electronics.get(i));
+                        }
+                    }
+                    else if (userInput == 2) {
+                        for (int i = 0; i < 3; i++) {
+                            System.out.println((i + 1) + "." + clothing.get(i));
+                        }
+                    }
+                    else if (userInput == 3) {
+                        for (int i = 0; i < 3; i++) {
+                            System.out.println((i + 1) + "." + books.get(i));
+                        }
+                    }
+                    else if (userInput == 4) {
+                        System.out.println("Returning to main menu.");
+                    }
+                }
                 case 2:
                 case 3:
                 case 4:
