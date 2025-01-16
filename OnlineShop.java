@@ -162,6 +162,7 @@ public class OnlineShop {
                 else if (userInput == 4) {
                     System.out.println("Returning to main menu.");
                 }
+                break;
                 case 2:
                 case 3:
                 case 4:
