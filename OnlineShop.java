@@ -174,13 +174,13 @@ public class OnlineShop {
                     for (int i = 0; i < cart.size(); i++) {
                         System.out.println((i + 1) + ". " + cart.get(i) + " Quantity:" + cartQuantities.get(i) + " $" + cartPrices.get(i) + " each");
                     }
-                    System.out.println(cart.size() + ". Back to Main Menu\nSelect a product that you would like to remove by number:");
+                    System.out.println((cart.size() + 1) + ". Back to Main Menu\nSelect a product that you would like to remove by number:");
                     userInput = sc.nextInt();
-                    while (userInput < 1 || userInput > cart.size()) {
+                    while (userInput < 1 || userInput > (cart.size() + 1)) {
                         System.out.println("Invalid input, try again:");
                         userInput = sc.nextInt();
                     }
-                    if (userInput == cart.size()) {
+                    if (userInput == (cart.size() + 1)) {
                         System.out.println("Returning to main menu.");
                     }
                     else {
@@ -229,9 +229,18 @@ public class OnlineShop {
                                 booksStock.set(index, (booksStock.get(index) - cartQuantities.get(0)));
                             }
                         }
+                        int length = cart.size();
+                        for (int i = 0; i < length; length --) {
+                            cart.remove(0);
+                            cartQuantities.remove(0);
+                            cartPrices.remove(0);
+                        }
+                        System.out.println("\nThank you for your purchase!");
+
                     }
                 }
                 break;
+                
                 case 4:
                 case 5:
                 System.out.println("Thank you for visiting! Goodbye!");
