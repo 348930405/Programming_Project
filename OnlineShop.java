@@ -4,7 +4,6 @@ public class OnlineShop {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        ArrayList<String> categories = new ArrayList<>();
         ArrayList<String> electronics = new ArrayList<>();
         ArrayList<String> clothing = new ArrayList<>();
         ArrayList<String> books = new ArrayList<>();
@@ -17,10 +16,8 @@ public class OnlineShop {
         ArrayList<String> cart = new ArrayList<>();
         ArrayList<Integer> cartQuantities = new ArrayList<>();
         ArrayList<Integer> cartPrices = new ArrayList<>();
-
-        categories.add("Electronics");
-        categories.add("Clothing");
-        categories.add("Books");
+        ArrayList<String> orders = new ArrayList<>();
+        ArrayList<String> orderStatus = new ArrayList<>();
 
         electronics.add("Laptop");
         electronics.add("Smartphone");
@@ -61,7 +58,7 @@ public class OnlineShop {
 
         boolean loop = true;
         while (loop == true) {
-            System.out.println("\n--- Main Menu ---\n1. Browse Product Categories\n2. View Cart\n3. Checkout\n4. Admin Login\n5. Exit\nSelect a category by number:");
+            System.out.println("\n--- Main Menu ---\n1. Browse Product Categories\n2. View Cart\n3. Checkout\n4. Admin\n5. Exit\nSelect a category by number:");
             int total = 0;
             int useramount;
             int userInput = sc.nextInt();
@@ -168,7 +165,7 @@ public class OnlineShop {
                 case 2:
                 System.out.println("\n--- Cart ---");
                 if (cart.size() == 0) {
-                    System.out.println("Your art is empty. Returning to menu.");
+                    System.out.println("Your cart is empty. Returning to menu.");
                 }
                 else {
                     for (int i = 0; i < cart.size(); i++) {
@@ -193,6 +190,7 @@ public class OnlineShop {
                 break;
 
                 case 3:
+                String checkoutOrder = "";
                 if (cart.size() == 0) {
                     System.out.println("Your art is empty. Returning to menu.");
                 }
@@ -200,6 +198,7 @@ public class OnlineShop {
                     System.out.println("\n--- Checkout ---\nItems:");
                     for (int i = 0; i < cart.size(); i++) {
                         System.out.println(cartQuantities.get(i) + " " + cart.get(i));
+                        checkoutOrder += cartQuantities.get(i) + " " + cart.get(i) + "\n";
                     }
                     for (int i = 0; i < cart.size(); i++) {
                         total += cartQuantities.get(i) * cartPrices.get(i);
@@ -229,6 +228,8 @@ public class OnlineShop {
                                 booksStock.set(index, (booksStock.get(index) - cartQuantities.get(0)));
                             }
                         }
+                        orders.add(checkoutOrder);
+                        orderStatus.add("Ordered");
                         int length = cart.size();
                         for (int i = 0; i < length; length --) {
                             cart.remove(0);
@@ -242,6 +243,32 @@ public class OnlineShop {
                 break;
                 
                 case 4:
+                System.out.println("\n--- Admin Menu ---");
+                if (orders.size() == 0) {
+                    System.out.println("There are no orders placed. Returning to menu.");
+                }
+                else {
+                    for (int i = 0; i < orders.size(); i++) {
+                        System.out.println("\nOrder " + (i + 1) + ": " + orderStatus.get(i) + "\n" + orders.get(i));
+                    }
+                    System.out.println((orders.size() + 1) + ". Back to Main Menu");
+                    System.out.println("Enter the number of the order you would like to mark as \"Shipped\"");
+                    userInput = sc.nextInt();
+                    while (userInput != orders.size() + 1) {
+                        if (userInput < 1 || userInput > (orders.size() + 1)) {
+                            System.out.println("Invalid input, try again:");
+                            userInput = sc.nextInt();
+                        }
+                        else {
+                            orderStatus.set(userInput - 1, "Shipped");
+                            System.out.println("Order " + userInput + " has been marked as \"Shipped\"");
+                            userInput = sc.nextInt();
+                        }
+                    }
+                    System.out.println("Returning to main menu.");
+                }
+                break;
+
                 case 5:
                 System.out.println("Thank you for visiting! Goodbye!");
                 loop = false;
@@ -251,4 +278,4 @@ public class OnlineShop {
             }
         }
     }
-}            
+}
